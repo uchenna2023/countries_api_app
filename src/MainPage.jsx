@@ -1,11 +1,27 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
-import Garmany from './assets/Garmany.png'
 import {HiSearch} from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
+import CountryCard from './CountryCard'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+
+
 
 const MainPage = () => {
 
+  const [country, setCountry] = useState([]);
+
+  useEffect(()=>{
+    const fetchedData = async () => {
+      const response = await axios.get('https://restcountries.com/v3.1/all');
+      setCountry(response.data);
+    };
+
+    fetchedData()
+  },[])
+
+    // eslint-disable-next-line no-unused-vars
     const navigate = useNavigate();
   return (
     <div>
@@ -23,43 +39,8 @@ const MainPage = () => {
               <option>Oceania</option>
             </select>
           </div>
-          <div className="flex flex-col pr-1 gap-14 pb-5 pt-10 sm:pr-20 sm:pt-20 w-full sm:flex-row items-center">
-            <div className="w-9/12 bg-white rounded-md sm:w-9/12">
-              <img src={Garmany} alt="" className="w-full max-h-48 rounded-t-md"/>
-              <div className='p-5 font-nunito'>
-                <h3 className='pb-5 font-extrabold'>Germany</h3>
-                <p >Population:</p>
-                <p>Region:</p>
-                <p>Capital:</p>
-              </div>
-            </div>
-            <div className="w-9/12 bg-white rounded-md" onClick={() => navigate('details')}>
-              <img src={Garmany} alt="" className="w-full max-h-48 rounded-t-md"/>
-              <div className='p-5'>
-                <h3 className='pb-5 font-bold'>Germany</h3>
-                <p >Population:</p>
-                <p>Region:</p>
-                <p>Capital:</p>
-              </div>
-            </div>
-            <div className="w-9/12 bg-white rounded-md">
-              <img src={Garmany} alt="" className="w-full max-h-48 rounded-t-md"/>
-              <div className='p-5'>
-                <h3 className='pb-5 font-bold'>Germany</h3>
-                <p >Population:</p>
-                <p>Region:</p>
-                <p>Capital:</p>
-              </div>
-            </div>
-            <div className="w-9/12 bg-white rounded-md">
-              <img src={Garmany} alt="" className="w-full max-h-48 rounded-t-md"/>
-              <div className='p-5'>
-                <h3 className='pb-5 font-bold'>Germany</h3>
-                <p >Population:</p>
-                <p>Region:</p>
-                <p>Capital:</p>
-              </div>
-            </div>
+          <div className="flex flex-col pr-1 gap-5 pb-5 pt-10 sm:pr-0 sm:pt-20 w-full items-center sm:grid-cols-4 sm:grid sm:gap-y-7">
+            {country?.map((c)=>(<CountryCard key={c?.name?.common} flags={c?.flags?.png} name={c?.name?.common} population={c?.population} capital={c?.capital} region={c?.region}/>))}
           </div>
         </div>
     </div>
