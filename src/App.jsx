@@ -11,7 +11,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />}/>
-        <Route path="/details" element={<Details />}/>
+        <Route path="/details/:capital" element={<Details />}/>
       </Routes>
     </>
   );

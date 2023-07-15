@@ -88,7 +88,7 @@ const MainPage = () => {
             </select>
           </div>
           <div className="flex flex-col pr-1 gap-5 pb-5 pt-10 sm:pr-0 sm:pt-20 w-full items-center sm:grid-cols-4 sm:grid sm:gap-y-7">
-            {country?.map((c)=>(<CountryCard key={c?.name?.common} flags={c?.flags?.png} name={c?.name?.common} population={c?.population} capital={c?.capital} region={c?.region}/>))}
+            {country?.map((c)=>(<CountryCard key={c?.name?.common} flags={c?.flags?.png} name={c?.name?.common} population={c?.population} capital={c?.capital} region={c?.region} navigate={()=>navigate(`/details/${c?.capital}`)}/>))}
           </div>
         </div>
     </div>
