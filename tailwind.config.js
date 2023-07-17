@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       fontFamily:{
-        nunito: ['Nunito Sans']
+        nunito: ['Nunito Sans', 'sans-serif']
       }
     },
   },
@@ -14,5 +14,6 @@ export default {
     // eslint-disable-next-line no-undef
     require('flowbite/plugin')
   ],
+  darkMode: 'class'
 }
 
