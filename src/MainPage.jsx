@@ -11,6 +11,9 @@ import { useState, useEffect } from 'react'
 
 const MainPage = (props) => {
 
+  const [isloading, setIsloading] = useState(false)
+
+
 
   const [country, setCountry] = useState([]);
   const [searchInput, setSearchInput] = useState('')
@@ -38,13 +41,18 @@ const MainPage = (props) => {
 
   //Api effect
   useEffect(()=>{
+    setIsloading(true)
+  
     if(selectInput === 'filter') {
+      
       fetch(`https://restcountries.com/v3.1/all`)
         .then((res) => res.json())
         .then((data) => {
           return (
             setCountry(data),
-            setFilterSearch(data))
+            setFilterSearch(data),
+            setIsloading(false))
+            
         })
 
     } else {
@@ -52,7 +60,8 @@ const MainPage = (props) => {
         .then((res) => res.json()).then((data)=>{
           return (
             setCountry(data), 
-            setFilterSearch(data)
+            setFilterSearch(data),
+            setIsloading(false)
           )
         })
     }
@@ -90,9 +99,10 @@ const MainPage = (props) => {
               <option value='oceania'>Oceania</option>
             </select>
           </div>
-          <div className="flex flex-col pr-1 gap-5 pb-5 pt-10 sm:pr-0 sm:pt-20 w-full items-center sm:grid-cols-4 sm:grid sm:gap-y-14">
-            {country?.map((c)=>(<CountryCard key={c?.name?.common} flags={c?.flags?.png} name={c?.name?.common} population={c?.population} capital={c?.capital} region={c?.region} navigate={()=>navigate(`/details/${c?.capital}`)} darkMode={props.darkMode}/>))}
-          </div>
+          
+          {isloading ? <p className='text-center text-4xl font-nunito font-semibold pt-36 pb-72 dark:text-slate-300'>Loading...</p> : <div className="flex flex-col pr-1 gap-5 pb-5 pt-10 sm:pr-0 sm:pt-20 w-full items-center sm:grid-cols-4 sm:grid sm:gap-y-14">
+            {country?.map((c)=>(<CountryCard key={c?.name?.common} flags={c?.flags?.png} name={c?.name?.common} population={c?.population} capital={c?.capital} region={c?.region} navigate={()=>navigate(`/details/${c.cca3}`)} darkMode={props.darkMode}/>))}
+          </div>}
         </div>
     </div>
   )

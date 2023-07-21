@@ -18,7 +18,7 @@ function App() {
       <Header handleToggle={handleToggle} darkMode={darkMode}/>
       <Routes>
         <Route path="/" element={<MainPage darkMode={darkMode}/>}/>
-        <Route path="/details/:capital" element={<Details darkMode={darkMode} />}/>
+        <Route path="/details/:cca3" element={<Details darkMode={darkMode} />}/>
       </Routes>
     </>
   );

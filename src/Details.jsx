@@ -7,16 +7,25 @@ import { useNavigate, useParams } from 'react-router-dom'
 import CountryDetails from './CountryDetails'
 
 const Details = (props) => {
-    let {capital} = useParams();
+    let {cca3} = useParams();
     const navigate = useNavigate();
     const [details, setDetails] = useState([])
+    const [isloading, setIsloading] = useState()
 
     useEffect(() => {
-        fetch(`https://restcountries.com/v3.1/capital/${capital}`)
+      setIsloading(true)
+        fetch(`https://restcountries.com/v3.1/alpha/${cca3}`)
           .then((res) => res.json())
-          .then((data) => setDetails(data))
+          .then((data) => {
+            return (
+              setDetails(data),
+              setIsloading(false)
+            )
+          }
+          )
           .catch((err) => console.log("Error:", err.message));
-      }, [capital]);
+
+      }, [cca3]);
       
   return (
     <div className={props.darkMode ? 'dark' : ''}>
@@ -25,7 +34,7 @@ const Details = (props) => {
             <BiArrowBack/>
             <p className='text-base '>Back</p>
         </button>
-        {details.map((x)=><CountryDetails key={x?.name?.common} flag={x?.flags?.png} name={x?.name?.common} population={x?.population} region={x?.region} subregion={x?.subregion} capital={x?.capital} domain={x?.tld[0]} currency={x?.currencies[Object?.keys(x?.currencies)[0]]?.name} lang={x?.languages[Object?.keys(x?.languages)[0]]} borders={x?.borders}/>)}
+        {isloading ? <p className='text-center text-4xl font-nunito font-semibold pt-36 pb-72 dark:text-slate-300'>Loading...</p> : details.map((x)=><CountryDetails key={x?.name?.common} flag={x?.flags?.png} name={x?.name?.common} population={x?.population} region={x?.region} subregion={x?.subregion} capital={x?.capital} domain={x?.tld[0]} currency={x?.currencies[Object?.keys(x?.currencies)[0]]?.name} lang={x?.languages[Object?.keys(x?.languages)[0]]} borders={x?.borders}/>)}
     </div>
     </div>
     

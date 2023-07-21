@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom'
 const CountryDetails = (props) => {
     const navigate = useNavigate();
     
+
+    
   return (
         <div className='flex flex-col w-full sm:flex-row'>
             <div className='w-full sm:w-6/12'>
@@ -35,7 +37,7 @@ const CountryDetails = (props) => {
             <p className='font-nunito font-semibold dark:text-slate-300'>Border Countries:</p>
         </div>
         <div className='grid grid-cols-4 gap-3'>
-            {props.borders ? (props.borders?.map((b,index)=> <BordersButton key={index} item={b} onClick={() => navigate(`/${b}`)}/>)) : <p className='dark:text-slate-300'>No borders</p>}
+            {props.borders ? (props.borders?.map((b,index)=> <BordersButton key={index} item={b} borderNav={navigate(`/details/${b}`)}/>)) : <p className='dark:text-slate-300'>No borders</p>}
         </div>
     </div>
             </div>
