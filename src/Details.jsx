@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+
 import React, { useState,useEffect } from 'react'
 //import Garmany from './assets/Garmany.png'
 import {BiArrowBack} from 'react-icons/bi'

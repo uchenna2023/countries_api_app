@@ -18,15 +18,16 @@ const MainPage = (props) => {
   const [country, setCountry] = useState([]);
   const [searchInput, setSearchInput] = useState('')
   const [filterSearch, setFilterSearch] = useState([])
-  // eslint-disable-next-line no-unused-vars
   const [selectInput, setSelectInput] = useState('filter')
 
 
-  
+  //function that handle select input value
   const handleSelect = (e)=> {
     setSelectInput(e.target.value)
     
   }
+
+  //function that handle search input value
   const handleChange = (e)=> {
     setSearchInput(e.target.value);
     setCountry(filterSearch.filter((x)=>x?.name?.common.toLowerCase().includes(e.target.value.toLowerCase())))
@@ -57,7 +58,8 @@ const MainPage = (props) => {
 
     } else {
       fetch(`https://restcountries.com/v3.1/region/${selectInput}`)
-        .then((res) => res.json()).then((data)=>{
+        .then((res) => res.json())
+        .then((data)=>{
           return (
             setCountry(data), 
             setFilterSearch(data),
@@ -66,15 +68,6 @@ const MainPage = (props) => {
         })
     }
     
-
-    {/*const fetchedData = async () => {
-
-      const response = await axios.get('https://restcountries.com/v3.1/all');
-      setCountry(response.data);
-      setFilterSearch(response.data)
-    };
-
-  fetchedData()*/}
 
   },[selectInput])
 
@@ -101,7 +94,7 @@ const MainPage = (props) => {
           </div>
           
           {isloading ? <p className='text-center text-4xl font-nunito font-semibold pt-36 pb-72 dark:text-slate-300'>Loading...</p> : <div className="flex flex-col pr-1 gap-5 pb-5 pt-10 sm:pr-0 sm:pt-20 w-full items-center sm:grid-cols-4 sm:grid sm:gap-y-14">
-            {country?.map((c)=>(<CountryCard key={c?.name?.common} flags={c?.flags?.png} name={c?.name?.common} population={c?.population} capital={c?.capital} region={c?.region} navigate={()=>navigate(`/details/${c.cca3}`)} darkMode={props.darkMode}/>))}
+            {country?.map((c)=>(<CountryCard key={c?.name?.common} flags={c?.flags?.svg} name={c?.name?.common} population={c?.population} capital={c?.capital} region={c?.region} navigate={()=>navigate(`/details/${c.cca3}`)} darkMode={props.darkMode}/>))}
           </div>}
         </div>
     </div>

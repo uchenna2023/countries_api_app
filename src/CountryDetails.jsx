@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+
 import React from 'react'
 import BordersButton from './BordersButton'
 import { useNavigate } from 'react-router-dom'
 
 // eslint-disable-next-line react/prop-types
-//flag, name, population, region, subregion, capital, domain, currency, lang, borders
 const CountryDetails = (props) => {
     const navigate = useNavigate();
     
@@ -36,7 +36,7 @@ const CountryDetails = (props) => {
         <div>
             <p className='font-nunito font-semibold dark:text-slate-300'>Border Countries:</p>
         </div>
-        <div className='grid grid-cols-4 gap-3'>
+        <div className='grid grid-cols-3 sm:grid sm:grid-cols-4 gap-3'>
             {props.borders ? (props.borders?.map((b,index)=> <BordersButton key={index} item={b} borderNav={navigate(`/details/${b}`)}/>)) : <p className='dark:text-slate-300'>No borders</p>}
         </div>
     </div>

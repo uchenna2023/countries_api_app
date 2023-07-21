@@ -6,8 +6,8 @@ const CountryCard = ({flags, name, population, region, capital, navigate, darkMo
   
   return (
     <div className={darkMode? 'dark' : ''}>
-      <div className="bg-white w-11/12 dark:bg-slate-800 dark:text-slate-300 rounded-md sm:w-9/12 sm:h-80" onClick={navigate}>
-              <img src={flags} alt="" className="w-full h-36 rounded-t-md"/>
+      <div className="bg-white w-[300px] dark:bg-slate-800 dark:text-slate-300 rounded-md sm:w-9/12 sm:h-80" onClick={navigate}>
+              <img src={flags} alt="" className="h-36 w-full rounded-t-md object-cover"/>
               <div className='p-5 font-nunito'>
                 <h3 className='pb-5 font-extrabold'>{name}</h3>
                 <p >Population: {population}</p>
